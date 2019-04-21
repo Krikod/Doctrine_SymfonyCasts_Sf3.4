@@ -85,8 +85,6 @@ class Genus
         $this->funFact = $funFact;
     }
 
-
-
     /**
      * @return mixed
      */
@@ -101,6 +99,11 @@ class Genus
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getUpdatedAt()
+    {
+        return new \DateTime('-'.rand(0,100).' days');
     }
 
 

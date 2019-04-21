@@ -28,11 +28,54 @@ class GenusController extends Controller
     }
 
     /**
-     * @Route("/genus/(genusName)")
+     * @Route("/genus")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $genuses = $em->getRepository('AppBundle:Genus')
+            ->findAll();
+
+        return $this->render('genus/list.html.twig', array(
+            'genuses' => $genuses
+        ));
+    }
+
+    /**
+     * @Route("/genus/{genusName}", name="genus_show")
      * @param $genusName
      */
     public function showAction($genusName)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $genus = $em->getRepository('AppBundle:Genus')
+            ->findOneBy(array(
+                'name' => $genusName
+       ));
+        if (!$genus) {
+            throw $this->createNotFoundException('genus not found');
+//            Make a template 404 !!
+        }
+        // todo - add the caching back later
+        /*
+        $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
+        $key = md5($funFact);
+        if ($cache->contains($key)) {
+            $funFact = $cache->fetch($key);
+        } else {
+            sleep(1); // fake how slow this could be
+            $funFact = $this->get('markdown.parser')
+                ->transform($funFact);
+            $cache->save($key, $funFact);
+        }
+        */
+
+        return $this->render('genus/show.html.twig', array(
+            'genus' => $genus
+        ));
+
 
     }
 
