@@ -7,6 +7,7 @@
             <th>Genus</th>
             <th># of species</th>
             <th>Last updated</th>
+            {#<th>Published</th>#}
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,11 @@
                 </td>
                 <td>{{ genus.speciesCount }}</td>
                 <td>{{ genus.updatedAt|date('Y-m-d') }}</td>
+                {#{% if genus.isPublished == true %}#}
+                {#<td>publié</td>#}
+                    {#{% else %}#}
+                        {#<td>non publié</td>#}
+                {#{% endif %}#}
             </tr>
         {% endfor %}
         </tbody>
