@@ -69,3 +69,9 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+hautelook_alice:
+    fixtures_path: 'DataFixtures/ORM' # Path to which to look for fixtures relative to the project directory or the bundle path.
+    root_dirs:
+        - '%kernel.root_dir%'
+        - '%kernel.project_dir%'
